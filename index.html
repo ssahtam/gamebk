@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1 ในร้อยล้าน: ดาร์กแฟนตาซีต่างโลก (Tarnished Isekai Souls)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Cinzel+Decorative:wght@700&family=MedievalSharp&family=Sarabun:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+    body {
+      background-color: #07060a;
+      color: #cbd5e1;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      font-family: 'Sarabun', sans-serif;
+      background-image: 
+        radial-gradient(circle at 50% 10%, rgba(201, 151, 56, 0.08), transparent 60%),
+        radial-gradient(#15121e 1px, transparent 1px),
+        radial-gradient(#15121e 1px, #07060a 1px);
+      background-size: 100% 100%, 36px 36px, 36px 36px;
+      background-position: 0 0, 0 0, 18px 18px;
+      padding: 14px;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, .gothic-title {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+    }
+    .cinzel-decor {
+      font-family: 'Cinzel Decorative', serif;
+    }
+    .story-text {
+      font-family: 'Sarabun', sans-serif;
+      font-size: 15.5px;
+      line-height: 1.8;
+      color: #e2e8f0;
+      letter-spacing: 0.2px;
+    }
+    /* Custom Gothic Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d0f17;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3d4a6b;
+      border-radius: 3px;
+      border: 1px solid #c99738;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #c99738;
+    }
+    button {
+      background-color: #111827;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      font-family: inherit;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .crt-filter {
+      position: relative;
+    }
+    .crt-filter::after {
+      content: " ";
+      display: block;
+      position: fixed;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      z-index: 99999;
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>

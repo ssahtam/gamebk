@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%" shape-rendering="crispEdges">
+  <defs>
+    <!-- Night Sky Gradient -->
+    <linearGradient id="bambooNightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#021c16"/>
+      <stop offset="60%" stop-color="#064e3b"/>
+      <stop offset="100%" stop-color="#022c22"/>
+    </linearGradient>
+    <!-- Moonlight Glow -->
+    <radialGradient id="moonGlow" cx="75%" cy="25%" r="40%">
+      <stop offset="0%" stop-color="#a7f3d0" stop-opacity="0.45"/>
+      <stop offset="50%" stop-color="#047857" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#047857" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Sword Holy Blade Glow -->
+    <radialGradient id="bladeGlow" cx="50%" cy="55%" r="35%">
+      <stop offset="0%" stop-color="#67e8f9" stop-opacity="0.5"/>
+      <stop offset="40%" stop-color="#0284c7" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="800" height="450" fill="url(#bambooNightSky)"/>
+  <rect width="800" height="450" fill="url(#moonGlow)"/>
+  <rect width="800" height="450" fill="url(#bladeGlow)"/>
+
+  <!-- Full Moon behind Bamboo Canopy -->
+  <circle cx="600" cy="90" r="45" fill="#fef08a"/>
+  <circle cx="600" cy="90" r="55" fill="#ecfdf5" opacity="0.3"/>
+
+  <!-- Distant Mountain Silhouettes -->
+  <polygon points="0,240 180,160 360,250 540,170 800,240 800,450 0,450" fill="#011b15"/>
+
+  <!-- Dense Bamboo Stalks Background Layer -->
+  <!-- Layer 1: Dark Green Stalks -->
+  <g fill="#064e3b" opacity="0.7">
+    <rect x="40" y="0" width="12" height="400"/>
+    <rect x="90" y="0" width="10" height="400"/>
+    <rect x="150" y="0" width="14" height="400"/>
+    <rect x="230" y="0" width="11" height="400"/>
+    <rect x="560" y="0" width="13" height="400"/>
+    <rect x="650" y="0" width="12" height="400"/>
+    <rect x="710" y="0" width="15" height="400"/>
+    <rect x="770" y="0" width="10" height="400"/>
+  </g>
+
+  <!-- Ground Moss & Stones -->
+  <polygon points="0,320 800,320 800,450 0,450" fill="#022c22"/>
+  <rect x="0" y="340" width="800" height="110" fill="#011812"/>
+
+  <!-- Layer 2: Foreground Bamboo Stalks with Runic Green Bands -->
+  <g fill="#047857">
+    <rect x="70" y="0" width="22" height="450"/>
+    <rect x="190" y="0" width="26" height="450"/>
+    <rect x="280" y="0" width="20" height="450"/>
+    <rect x="510" y="0" width="22" height="450"/>
+    <rect x="620" y="0" width="28" height="450"/>
+    <rect x="730" y="0" width="24" height="450"/>
+  </g>
+  <!-- Bamboo Joint Nodes -->
+  <g fill="#022c22">
+    <rect x="66" y="80" width="30" height="4"/>
+    <rect x="66" y="190" width="30" height="4"/>
+    <rect x="66" y="300" width="30" height="4"/>
+    <rect x="186" y="110" width="34" height="5"/>
+    <rect x="186" y="230" width="34" height="5"/>
+    <rect x="276" y="70" width="28" height="4"/>
+    <rect x="276" y="180" width="28" height="4"/>
+    <rect x="506" y="90" width="30" height="4"/>
+    <rect x="506" y="210" width="30" height="4"/>
+    <rect x="616" y="120" width="36" height="5"/>
+    <rect x="616" y="250" width="36" height="5"/>
+  </g>
+
+  <!-- Stone Altar in the Center Clearing (แท่นศิลาศักดิ์สิทธิ์) -->
+  <polygon points="340,310 460,310 490,360 310,360" fill="#1e293b"/>
+  <polygon points="310,360 490,360 510,400 290,400" fill="#0f172a"/>
+  <!-- Moss on Altar -->
+  <rect x="330" y="330" width="40" height="8" fill="#10b981" opacity="0.6"/>
+  <rect x="420" y="345" width="50" height="9" fill="#10b981" opacity="0.6"/>
+
+  <!-- THE SENTIENT HOLY BLADE (Floating above the altar, bathed in cyan light) -->
+  <!-- Shadow on Altar Top -->
+  <ellipse cx="400" cy="312" rx="24" ry="4" fill="#000000" opacity="0.8"/>
+
+  <!-- Holy Katana Blade (Vertical, blade pointed down) -->
+  <rect x="397" y="140" width="6" height="135" fill="#f8fafc"/>
+  <rect x="395" y="140" width="3" height="135" fill="#67e8f9"/>
+  <!-- Sharp Tip -->
+  <polygon points="395,275 403,275 400,295" fill="#ffffff"/>
+
+  <!-- Glowing Runes on Blade -->
+  <text x="400" y="180" fill="#0284c7" font-size="8" font-family="monospace" text-anchor="middle">ᚦ</text>
+  <text x="400" y="210" fill="#0284c7" font-size="8" font-family="monospace" text-anchor="middle">ᚨ</text>
+  <text x="400" y="240" fill="#0284c7" font-size="8" font-family="monospace" text-anchor="middle">ᚱ</text>
+
+  <!-- Golden Tsuba Crossguard with Sentient Crimson Eye -->
+  <ellipse cx="400" cy="138" rx="18" ry="6" fill="#f59e0b" stroke="#78350f" stroke-width="2"/>
+  <circle cx="400" cy="138" r="4" fill="#dc2626"/>
+  <circle cx="400" cy="138" r="1.5" fill="#fef08a"/>
+
+  <!-- Hilt / Tsuka (Black wrapping with gold diamond menuki) -->
+  <rect x="396" y="90" width="8" height="45" fill="#090d16" stroke="#c99738" stroke-width="1"/>
+  <polygon points="398,100 400,96 402,100 400,104" fill="#ffd166"/>
+  <polygon points="398,115 400,111 402,115 400,119" fill="#ffd166"/>
+  <!-- Pommel Cap (Kashira) -->
+  <rect x="394" y="85" width="12" height="6" fill="#f59e0b"/>
+
+  <!-- Swirling Fireflies (หิ่งห้อยเรืองแสงสีเขียวมะนาว) -->
+  <circle cx="340" cy="220" r="3" fill="#4ade80"/>
+  <circle cx="450" cy="180" r="2.5" fill="#4ade80"/>
+  <circle cx="480" cy="260" r="3.5" fill="#86efac"/>
+  <circle cx="310" cy="280" r="2" fill="#86efac"/>
+  <circle cx="420" cy="110" r="2" fill="#4ade80"/>
+  <circle cx="360" cy="150" r="3" fill="#6ee7b7"/>
+
+  <!-- Floating Bamboo Leaves -->
+  <polygon points="320,160 335,164 322,170" fill="#15803d"/>
+  <polygon points="460,210 475,214 463,220" fill="#15803d"/>
+  <polygon points="380,270 395,273 382,278" fill="#15803d"/>
+</svg>
