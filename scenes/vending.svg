@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%" shape-rendering="crispEdges">
+  <defs>
+    <!-- Dark Dungeon Gradient -->
+    <radialGradient id="dungeonArchGrad" cx="50%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#1e102d"/>
+      <stop offset="50%" stop-color="#0d0914"/>
+      <stop offset="100%" stop-color="#020105"/>
+    </radialGradient>
+    <!-- Torch Light Radiance -->
+    <radialGradient id="torchGlowLeft" cx="20%" cy="40%" r="35%">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.45"/>
+      <stop offset="50%" stop-color="#ea580c" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#ea580c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="torchGlowRight" cx="80%" cy="40%" r="35%">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.45"/>
+      <stop offset="50%" stop-color="#ea580c" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#ea580c" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Vending Machine Neon Cyan Radiance -->
+    <radialGradient id="vendingAura" cx="50%" cy="55%" r="45%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.4"/>
+      <stop offset="40%" stop-color="#0284c7" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background: Deep Dungeon Hallway -->
+  <rect width="800" height="450" fill="url(#dungeonArchGrad)"/>
+
+  <!-- Torch Glows -->
+  <rect width="800" height="450" fill="url(#torchGlowLeft)"/>
+  <rect width="800" height="450" fill="url(#torchGlowRight)"/>
+  <rect width="800" height="450" fill="url(#vendingAura)"/>
+
+  <!-- Massive Gothic Archway & Stone Pillars -->
+  <!-- Left Pillar -->
+  <rect x="0" y="0" width="140" height="450" fill="#0c0a14"/>
+  <rect x="140" y="0" width="25" height="450" fill="#181324"/>
+  <!-- Right Pillar -->
+  <rect x="660" y="0" width="140" height="450" fill="#0c0a14"/>
+  <rect x="635" y="0" width="25" height="450" fill="#181324"/>
+
+  <!-- Archway Ceiling Stones -->
+  <polygon points="0,0 800,0 660,110 140,110" fill="#0a0812"/>
+  <polygon points="140,110 660,110 580,140 220,140" fill="#120e1f"/>
+
+  <!-- Left Dungeon Torch Sconce -->
+  <rect x="150" y="160" width="14" height="24" fill="#334155"/>
+  <polygon points="145,150 170,150 162,175 152,175" fill="#78350f"/>
+  <circle cx="157" cy="142" r="10" fill="#facc15"/>
+  <circle cx="157" cy="140" r="6" fill="#ffffff"/>
+  <!-- Right Dungeon Torch Sconce -->
+  <rect x="636" y="160" width="14" height="24" fill="#334155"/>
+  <polygon points="630,150 655,150 648,175 638,175" fill="#78350f"/>
+  <circle cx="643" cy="142" r="10" fill="#facc15"/>
+  <circle cx="643" cy="140" r="6" fill="#ffffff"/>
+
+  <!-- Cobblestone Dungeon Floor with Perspective -->
+  <polygon points="140,320 660,320 800,450 0,450" fill="#09070f"/>
+  <!-- Stone Tiles Grid Lines -->
+  <line x1="240" y1="320" x2="160" y2="450" stroke="#1c162b" stroke-width="2"/>
+  <line x1="360" y1="320" x2="330" y2="450" stroke="#1c162b" stroke-width="2"/>
+  <line x1="440" y1="320" x2="470" y2="450" stroke="#1c162b" stroke-width="2"/>
+  <line x1="560" y1="320" x2="640" y2="450" stroke="#1c162b" stroke-width="2"/>
+  <line x1="80" y1="360" x2="720" y2="360" stroke="#1c162b" stroke-width="2"/>
+  <line x1="30" y1="410" x2="770" y2="410" stroke="#1c162b" stroke-width="2"/>
+
+  <!-- Moss and Dungeon Cracks -->
+  <rect x="190" y="340" width="30" height="6" fill="#14532d" opacity="0.6"/>
+  <rect x="580" y="380" width="45" height="8" fill="#14532d" opacity="0.6"/>
+  <rect x="280" y="420" width="60" height="10" fill="#14532d" opacity="0.7"/>
+
+  <!-- CENTER ATTRACTION: The Glowing Enchanted Vending Machine (Standing tall) -->
+  <!-- Shadow on stone floor -->
+  <ellipse cx="400" cy="385" rx="110" ry="20" fill="#000000" opacity="0.85"/>
+
+  <!-- Vending Machine Silhouette & Body -->
+  <rect x="320" y="150" width="160" height="230" rx="8" fill="#1e293b" stroke="#475569" stroke-width="3"/>
+  <rect x="320" y="150" width="16" height="16" fill="#f59e0b"/>
+  <rect x="464" y="150" width="16" height="16" fill="#f59e0b"/>
+  <rect x="320" y="364" width="16" height="16" fill="#f59e0b"/>
+  <rect x="464" y="364" width="16" height="16" fill="#f59e0b"/>
+
+  <!-- Marquee Sign -->
+  <rect x="332" y="162" width="136" height="30" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="400" y="178" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">
+    ✦ ENCHANTED VENDOR ✦
+  </text>
+  <text x="400" y="188" fill="#facc15" font-family="'Cinzel', serif" font-size="7" font-weight="bold" text-anchor="middle">
+    FLOOR 1 DUNGEON REPLENISHMENT
+  </text>
+
+  <!-- Glowing Glass Window with Potions -->
+  <rect x="332" y="200" width="98" height="120" rx="3" fill="#0369a1" fill-opacity="0.35" stroke="#38bdf8" stroke-width="1.5"/>
+  <!-- Rows of Glowing Bottles -->
+  <!-- Row 1: Health Red Potions -->
+  <rect x="342" y="215" width="12" height="18" rx="2" fill="#ef4444"/>
+  <rect x="360" y="215" width="12" height="18" rx="2" fill="#ef4444"/>
+  <rect x="378" y="215" width="12" height="18" rx="2" fill="#ef4444"/>
+  <rect x="396" y="215" width="12" height="18" rx="2" fill="#ef4444"/>
+  <line x1="332" y1="240" x2="430" y2="240" stroke="#334155" stroke-width="2"/>
+  <!-- Row 2: Mana Blue Flasks -->
+  <rect x="342" y="250" width="12" height="18" rx="2" fill="#0284c7"/>
+  <rect x="360" y="250" width="12" height="18" rx="2" fill="#0284c7"/>
+  <rect x="378" y="250" width="12" height="18" rx="2" fill="#0284c7"/>
+  <rect x="396" y="250" width="12" height="18" rx="2" fill="#0284c7"/>
+  <line x1="332" y1="275" x2="430" y2="275" stroke="#334155" stroke-width="2"/>
+  <!-- Row 3: Golden Stamina Tonics -->
+  <rect x="350" y="285" width="14" height="20" rx="2" fill="#facc15"/>
+  <rect x="374" y="285" width="14" height="20" rx="2" fill="#a855f7"/>
+  <rect x="398" y="285" width="14" height="20" rx="2" fill="#22c55e"/>
+
+  <!-- Coin Slot Panel -->
+  <rect x="436" y="200" width="32" height="120" rx="3" fill="#0b0f19" stroke="#334155" stroke-width="1"/>
+  <rect x="440" y="208" width="24" height="14" fill="#052e16" stroke="#22c55e" stroke-width="1"/>
+  <circle cx="452" cy="235" r="4" fill="#ef4444"/>
+  <circle cx="452" cy="248" r="4" fill="#0284c7"/>
+  <circle cx="452" cy="261" r="4" fill="#facc15"/>
+  <!-- Glowing Coin Insertion Slot -->
+  <rect x="444" y="280" width="16" height="8" rx="1" fill="#ffd166"/>
+
+  <!-- Dispense Box Tray -->
+  <rect x="340" y="332" width="120" height="38" rx="4" fill="#07090e" stroke="#c99738" stroke-width="1.5"/>
+  <rect x="385" y="348" width="24" height="12" rx="2" fill="#ef4444"/>
+
+  <!-- Wandering Moth / Fireflies around the glow -->
+  <circle cx="360" cy="180" r="2" fill="#fef08a" opacity="0.8"/>
+  <circle cx="440" cy="160" r="2.5" fill="#fef08a" opacity="0.9"/>
+  <circle cx="480" cy="240" r="2" fill="#67e8f9" opacity="0.8"/>
+  <circle cx="300" cy="280" r="2" fill="#67e8f9" opacity="0.7"/>
+
+  <!-- Dark Vignette Border -->
+  <rect width="800" height="450" fill="none" stroke="#000000" stroke-width="18" opacity="0.5"/>
+</svg>
