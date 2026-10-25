@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { getAssetUrl } from '../utils/assets';
 
 // แมปปิ้งรูปภาพฉากศิลปะระดับมาสเตอร์เวิร์ก (Master Dark Fantasy Concept Art)
-export const SCENE_IMAGE_MAP = {
+const RAW_SCENE_IMAGE_MAP = {
   // วัยทารก & ความยากแค้น & ฤดูหนาว
   famine: '/scenes/famine.jpg',
   poverty: '/scenes/famine.jpg',
@@ -136,6 +137,10 @@ export const SCENE_IMAGE_MAP = {
   meme_face_chill: '/memes/meme_face_chill.jpg',
   face_chill: '/memes/meme_face_chill.jpg'
 };
+
+export const SCENE_IMAGE_MAP = Object.fromEntries(
+  Object.entries(RAW_SCENE_IMAGE_MAP).map(([k, v]) => [k, getAssetUrl(v)])
+);
 
 // สไตล์บรรยากาศฉากและสภาพอากาศ
 export const SCENE_THEMES = {

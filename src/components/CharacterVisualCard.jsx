@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import PixelCharacterAvatar from './PixelCharacterAvatar';
+import { getAssetUrl } from '../utils/assets';
 
 // แมปปิ้งรูปภาพพอร์ตเทรตตัวละคร (Character Portrait Art)
 export const PORTRAIT_IMAGE_MAP = {
-  ashen_lord: '/portraits/ashen_lord.jpg',
-  slime: '/portraits/slime.jpg',
-  skeleton: '/portraits/skeleton.jpg',
-  sentient_sword: '/portraits/sentient_sword.jpg',
-  mimic_chest: '/portraits/mimic_chest.jpg',
-  vending_machine: '/portraits/vending_machine.svg',
-  truck_calamity: '/portraits/truck_calamity.jpg',
-  capybara: '/portraits/capybara.jpg',
-  bean_knight: '/portraits/bean_knight.svg',
-  orange_cat: '/scenes/alley.jpg',
-  debt_priestess: '/scenes/aqua.jpg',
-  branded_one: '/scenes/berserk.jpg',
-  roomba: '/portraits/vending_machine.svg',
-  radahn: '/scenes/radahn.jpg',
-  frieren_mimic: '/scenes/mimic.jpg',
-  saitama: '/scenes/saitama.jpg'
+  ashen_lord: getAssetUrl('portraits/ashen_lord.jpg'),
+  slime: getAssetUrl('portraits/slime.jpg'),
+  skeleton: getAssetUrl('portraits/skeleton.jpg'),
+  sentient_sword: getAssetUrl('portraits/sentient_sword.jpg'),
+  mimic_chest: getAssetUrl('portraits/mimic_chest.jpg'),
+  vending_machine: getAssetUrl('portraits/vending_machine.svg'),
+  truck_calamity: getAssetUrl('portraits/truck_calamity.jpg'),
+  capybara: getAssetUrl('portraits/capybara.jpg'),
+  bean_knight: getAssetUrl('portraits/bean_knight.svg'),
+  orange_cat: getAssetUrl('scenes/alley.jpg'),
+  debt_priestess: getAssetUrl('scenes/aqua.jpg'),
+  branded_one: getAssetUrl('scenes/berserk.jpg'),
+  roomba: getAssetUrl('portraits/vending_machine.svg'),
+  radahn: getAssetUrl('scenes/radahn.jpg'),
+  frieren_mimic: getAssetUrl('scenes/mimic.jpg'),
+  saitama: getAssetUrl('scenes/saitama.jpg')
 };
 
 // หมวดหมู่และอนุกรมวิธานสิ่งมีชีวิต (Taxonomy Categories)

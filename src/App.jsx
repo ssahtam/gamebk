@@ -559,8 +559,10 @@ function GameContent() {
       {/* 16-Bit Meme Dynamic Multi-Layer Background */}
       <MemePixelBackground gameState={gameState} age={age} />
 
-      {/* Gothic Atmospheric Top Bar */}
-      <div style={headerStyle}>
+      {/* Main Game Foreground Container (Guaranteed above background) */}
+      <div style={{ position: 'relative', zIndex: 10, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        {/* Gothic Atmospheric Top Bar */}
+        <div style={headerStyle}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <span style={{ fontSize: '28px', filter: 'drop-shadow(0 0 6px #c99738)' }}>🕯️</span>
           <div>
@@ -733,6 +735,7 @@ function GameContent() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }

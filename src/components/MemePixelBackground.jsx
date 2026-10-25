@@ -117,21 +117,21 @@ export default function MemePixelBackground({ gameState = 'TITLE', age = 0 }) {
         position: 'absolute',
         inset: 0,
         background: gameState === 'DEAD'
-          ? 'radial-gradient(circle at 50% 20%, #200a2b 0%, #0c0514 60%, #050208 100%)'
+          ? 'radial-gradient(circle at 50% 20%, rgba(45, 12, 60, 0.45) 0%, rgba(12, 5, 20, 0.8) 60%, #050208 100%)'
           : gameState === 'BIRTH'
-          ? 'radial-gradient(circle at 50% 15%, #2a1b06 0%, #130d07 55%, #080604 100%)'
-          : 'radial-gradient(circle at 50% 15%, #2b0b11 0%, #130a17 55%, #07060a 100%)',
-        opacity: 0.95
+          ? 'radial-gradient(circle at 50% 15%, rgba(60, 38, 10, 0.4) 0%, rgba(19, 13, 7, 0.8) 55%, #080604 100%)'
+          : 'radial-gradient(circle at 50% 15%, rgba(65, 15, 25, 0.4) 0%, rgba(19, 10, 23, 0.8) 55%, #07060a 100%)',
+        opacity: 0.6
       }} />
 
       {/* 2. Dither Pixel Matrix Pattern Overlay */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        backgroundImage: `radial-gradient(rgba(201, 151, 56, 0.06) 1px, transparent 1px), radial-gradient(rgba(239, 68, 68, 0.04) 1px, transparent 1px)`,
+        backgroundImage: `radial-gradient(rgba(201, 151, 56, 0.05) 1px, transparent 1px), radial-gradient(rgba(239, 68, 68, 0.03) 1px, transparent 1px)`,
         backgroundSize: '24px 24px, 48px 48px',
         backgroundPosition: '0 0, 12px 12px',
-        opacity: 0.7
+        opacity: 0.4
       }} />
 
       {/* 3. Canvas Particles (Rising Embers & Stars) */}
@@ -145,19 +145,19 @@ export default function MemePixelBackground({ gameState = 'TITLE', age = 0 }) {
         }}
       />
 
-      {/* 4. Left Meme Guardian Pillar (Visible on larger screens) */}
+      {/* 4. Left Meme Guardian Pillar (Visible ONLY on very wide screens 1380px+ to avoid overlapping cards) */}
       <div style={{
-        position: 'absolute',
-        left: '20px',
-        top: '70px',
-        width: '150px',
+        position: 'fixed',
+        left: '24px',
+        top: '90px',
+        width: '135px',
         display: 'none',
         flexDirection: 'column',
         alignItems: 'center',
         gap: '12px',
-        opacity: 0.75,
+        opacity: 0.85,
         filter: 'drop-shadow(0 4px 16px rgba(0,0,0,0.8))',
-        '@media (min-width: 1100px)': { display: 'flex' }
+        zIndex: 1
       }} className="desktop-flank-left">
         <div style={{
           backgroundColor: '#0f1422',
@@ -171,7 +171,7 @@ export default function MemePixelBackground({ gameState = 'TITLE', age = 0 }) {
             ⚔️ จอมทัพเบอร์เซิร์ก
           </div>
           <div style={{ borderRadius: '4px', overflow: 'hidden', border: '1px solid #334155' }}>
-            <PixelMemeAvatar memeKey="portrait" size={100} />
+            <PixelMemeAvatar memeKey="portrait" size={90} />
           </div>
           <div style={{ fontSize: '9.5px', color: '#94a3b8', marginTop: '6px', lineHeight: '1.3' }}>
             "เกราะหนัก 200 กก.<br/>แต่หน้าตายังชิล"
@@ -191,19 +191,19 @@ export default function MemePixelBackground({ gameState = 'TITLE', age = 0 }) {
         </div>
       </div>
 
-      {/* 5. Right Meme Guardian Pillar (Visible on larger screens) */}
+      {/* 5. Right Meme Guardian Pillar (Visible ONLY on very wide screens 1380px+ to avoid overlapping cards) */}
       <div style={{
-        position: 'absolute',
-        right: '20px',
-        top: '70px',
-        width: '150px',
+        position: 'fixed',
+        right: '24px',
+        top: '90px',
+        width: '135px',
         display: 'none',
         flexDirection: 'column',
         alignItems: 'center',
         gap: '12px',
-        opacity: 0.75,
+        opacity: 0.85,
         filter: 'drop-shadow(0 4px 16px rgba(0,0,0,0.8))',
-        '@media (min-width: 1100px)': { display: 'flex' }
+        zIndex: 1
       }} className="desktop-flank-right">
         <div style={{
           backgroundColor: '#0f1422',
@@ -217,7 +217,7 @@ export default function MemePixelBackground({ gameState = 'TITLE', age = 0 }) {
             🐴 อัศวินม้าหน้าคน
           </div>
           <div style={{ borderRadius: '4px', overflow: 'hidden', border: '1px solid #334155' }}>
-            <PixelMemeAvatar memeKey="horse" size={100} />
+            <PixelMemeAvatar memeKey="horse" size={90} />
           </div>
           <div style={{ fontSize: '9.5px', color: '#94a3b8', marginTop: '6px', lineHeight: '1.3' }}>
             "120 กม./ชม.<br/>หน้าพริ้มท้าพายุ"
@@ -275,7 +275,7 @@ export default function MemePixelBackground({ gameState = 'TITLE', age = 0 }) {
 
       {/* Responsive CSS for desktop flank pillars */}
       <style>{`
-        @media (min-width: 1140px) {
+        @media (min-width: 1400px) {
           .desktop-flank-left, .desktop-flank-right {
             display: flex !important;
           }

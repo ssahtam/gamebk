@@ -1,11 +1,12 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
+import { getAssetUrl } from '../utils/assets';
 
 // แมปปิ้งรูปภาพมีมในตำนาน
 export const MEME_IMAGES = {
-  horse: '/memes/meme_berserk_horse.jpg',
-  portrait: '/memes/meme_berserk_portrait.jpg',
-  full: '/memes/meme_berserk_full.jpg',
-  chill: '/memes/meme_face_chill.jpg'
+  horse: getAssetUrl('memes/meme_berserk_horse.jpg'),
+  portrait: getAssetUrl('memes/meme_berserk_portrait.jpg'),
+  full: getAssetUrl('memes/meme_berserk_full.jpg'),
+  chill: getAssetUrl('memes/meme_face_chill.jpg')
 };
 
 // 4x4 Bayer Dithering Matrix สำหรับสไตล์ Aseprite 16-Bit แท้
@@ -23,32 +24,33 @@ export default function PixelMemeAvatar({
   style = {}
 }) {
   const canvasRef = useRef(null);
+  const [rendered, setRendered] = useState(false);
   const src = MEME_IMAGES[memeKey] || MEME_IMAGES.horse;
 
   useEffect(() => {
+    let isMounted = true;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
     const img = new Image();
-    img.crossOrigin = 'anonymous';
     img.src = src;
 
     img.onload = () => {
-      // 16-bit low-res offscreen buffer
-      const lowRes = 48;
-      const offCanvas = document.createElement('canvas');
-      offCanvas.width = lowRes;
-      offCanvas.height = lowRes;
-      const offCtx = offCanvas.getContext('2d', { willReadFrequently: true });
-
-      offCtx.imageSmoothingEnabled = false;
-      offCtx.drawImage(img, 0, 0, lowRes, lowRes);
-
+      if (!isMounted) return;
       try {
+        const lowRes = 48;
+        const offCanvas = document.createElement('canvas');
+        offCanvas.width = lowRes;
+        offCanvas.height = lowRes;
+        const offCtx = offCanvas.getContext('2d', { willReadFrequently: true });
+
+        offCtx.imageSmoothingEnabled = false;
+        offCtx.drawImage(img, 0, 0, lowRes, lowRes);
+
         const imgData = offCtx.getImageData(0, 0, lowRes, lowRes);
         const data = imgData.data;
-        const levels = 24; // 16-bit SNES/GBA steps
+        const levels = 24;
         const step = 255 / (levels - 1);
 
         for (let y = 0; y < lowRes; y++) {
@@ -61,13 +63,25 @@ export default function PixelMemeAvatar({
           }
         }
         offCtx.putImageData(imgData, 0, 0);
-      } catch (e) {
-        // Fallback gracefully on cross-origin
-      }
 
-      ctx.imageSmoothingEnabled = false;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(offCanvas, 0, 0, canvas.width, canvas.height);
+        ctx.imageSmoothingEnabled = false;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(offCanvas, 0, 0, canvas.width, canvas.height);
+        setRendered(true);
+      } catch (e) {
+        // Fallback to direct draw
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        setRendered(true);
+      }
+    };
+
+    img.onerror = () => {
+      if (isMounted) setRendered(false);
+    };
+
+    return () => {
+      isMounted = false;
     };
   }, [src, size]);
 
@@ -79,16 +93,16 @@ export default function PixelMemeAvatar({
         height: `${size}px`,
         borderRadius: '6px',
         overflow: 'hidden',
-        border: '1.5px solid #475569',
-        backgroundColor: '#070a12',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.6)',
+        backgroundColor: '#0c0f18',
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
-        flexShrink: 0,
+        position: 'relative',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.5)',
         ...style
       }}
     >
+      {/* 16-Bit Pixel Dither Canvas */}
       <canvas
         ref={canvasRef}
         width={size}
@@ -96,10 +110,25 @@ export default function PixelMemeAvatar({
         style={{
           width: '100%',
           height: '100%',
-          display: 'block',
-          imageRendering: 'pixelated'
+          imageRendering: 'pixelated',
+          display: rendered ? 'block' : 'none'
         }}
       />
+
+      {/* Guaranteed Native <img> Fallback (never blank) */}
+      {!rendered && (
+        <img
+          src={src}
+          alt={memeKey}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            imageRendering: 'pixelated',
+            display: 'block'
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -1,3 +1,5 @@
+import { getAssetUrl } from '../utils/assets';
+
 // ชาติกำเนิดและสิ่งมีชีวิตหลักที่สุ่มเกิดใหม่ในโลกดาร์กแฟนตาซี
 // ยุบเหลือเผ่าแฟนตาซีหลักตามที่ผู้เล่นต้องการ: มนุษย์, เอลฟ์, ออร์ค, ปีศาจ, สไลม์, โครงกระดูก, คาปิบาร่า
 export const RACES = [
@@ -11,7 +13,7 @@ export const RACES = [
     badge: 'เผ่าพันธุ์แห่งความหวัง',
     badgeColor: '#f59e0b',
     avatar: '🧑',
-    portrait: '/portraits/salaryman.svg',
+    portrait: getAssetUrl('portraits/salaryman.svg'),
     familyStatus: 'เกิดในครอบครัวคนธรรมดา แต่พกความทรงจำจากชาติก่อนมาด้วย',
     startingAssets: 'มีดสั้นพกพา, เสื้อผ้าป่าน, กระเป๋าสะพายใบเก่า',
     namingGiver: 'พ่อแม่ยิ้มทั้งน้ำตาแล้วตั้งชื่อให้เจ้าว่า',
@@ -37,7 +39,7 @@ export const RACES = [
     badge: 'สายเลือดจอมเวทพฤกษา',
     badgeColor: '#10b981',
     avatar: '🧝',
-    portrait: '/portraits/slum_elf.svg',
+    portrait: getAssetUrl('portraits/slum_elf.svg'),
     familyStatus: 'เกิดใต้ร่มเงาพฤกษาศักดิ์สิทธิ์โบราณแห่งพงไพร',
     startingAssets: 'คันธนูไม้เอลฟ์, ผลึกมานาสีมรกต, ชาสมุนไพร',
     namingGiver: 'ผู้เฒ่าพฤกษาฟังเสียงลมกระซิบแล้วตั้งชื่อให้เจ้าว่า',
@@ -63,7 +65,7 @@ export const RACES = [
     badge: 'สายบวกบ้าพลัง',
     badgeColor: '#dc2626',
     avatar: '👹',
-    portrait: '/portraits/goblin.svg',
+    portrait: getAssetUrl('portraits/goblin.svg'),
     familyStatus: 'เกิดในค่ายชนเผ่าริมผาหิน ท่ามกลางเสียงตีกลองศึก',
     startingAssets: 'ขวานหินเล่มโต, สร้อยเขี้ยวหมาป่า, เนื้อตากแห้ง',
     namingGiver: 'หัวหน้าเผ่าเคาะกระบองเหล็กคำรามก้องแล้วตั้งชื่อว่า',
@@ -89,7 +91,7 @@ export const RACES = [
     badge: 'ทายาทจอมมาร',
     badgeColor: '#8b5cf6',
     avatar: '😈',
-    portrait: '/portraits/ashen_lord.svg',
+    portrait: getAssetUrl('portraits/ashen_lord.svg'),
     familyStatus: 'จุติขึ้นจากกองเพลิงนรกานต์ในปราสาทแดนอสูร',
     startingAssets: 'คัมภีร์เวทมืด, จี้ห้อยคอศิลานรก, ชิ้นส่วนเขี้ยวอสูร',
     namingGiver: 'เปลวไฟทมิฬลุกโชนสลักอักขระชื่อเจ้าลงบนศิลาว่า',
@@ -115,7 +117,7 @@ export const RACES = [
     badge: 'ก้อนเจลลี่ไร้ขีดจำกัด',
     badgeColor: '#0ea5e9',
     avatar: '🟢',
-    portrait: '/portraits/slime.svg',
+    portrait: getAssetUrl('portraits/slime.svg'),
     familyStatus: 'เกิดจากไอมานาตกผลึกในถ้ำมืด (ไร้ครอบครัวแต่มีมล้นเหลือ)',
     startingAssets: 'เมือกเหนียวพิเศษ, ผลึกแร่เรืองแสง, ขนมปังที่กลืนมาครึ่งก้อน',
     namingGiver: 'มังกรผู้พิทักษ์ถ้ำเอานิ้วจิ้มพุงดึ๋งดั๋งแล้วตั้งชื่อให้ว่า',
@@ -141,7 +143,7 @@ export const RACES = [
     badge: 'อันเดดสายฮา',
     badgeColor: '#94a3b8',
     avatar: '💀',
-    portrait: '/portraits/skeleton.svg',
+    portrait: getAssetUrl('portraits/skeleton.svg'),
     familyStatus: 'ลุกขึ้นมาจากหลุมศพเก่าหลังโดนฟ้าผ่า',
     startingAssets: 'ซี่โครงสำรอง 1 ซี่, หมวกเกราะขึ้นสนิม, ผ้าคลุมขาดวิ่น',
     namingGiver: 'ป้ายหลุมศพหินที่สึกกร่อนสลักชื่อเจ้าไว้ว่า',
@@ -167,7 +169,7 @@ export const RACES = [
     badge: 'มิตรแท้แห่งมัลติเวิร์ส',
     badgeColor: '#d97706',
     avatar: '🐾',
-    portrait: '/scenes/capybara.jpg',
+    portrait: getAssetUrl('scenes/capybara.jpg'),
     familyStatus: 'นอนแช่ออนเซ็นอยู่กับฝูงริมธารน้ำใส',
     startingAssets: 'ส้มยูสุวางบนหัว 1 ผล, ขนกันน้ำ, รอยยิ้มละมุน',
     namingGiver: 'นกกระยางที่เกาะบนหลังก้มลงกระซิบชื่อเจ้าว่า',
