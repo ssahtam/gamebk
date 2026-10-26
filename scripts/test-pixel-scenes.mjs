@@ -1,11 +1,12 @@
 import fs from 'fs';
 import path from 'path';
-import { SCENE_IMAGE_MAP, SCENE_THEMES } from '../src/components/SceneViewport.jsx';
+import { SCENE_IMAGE_MAP, SCENE_THEMES } from '../src/data/sceneThemesData.js';
 
 console.log('--- Verifying Scene Assets and Mappings ---');
 
 const sceneKeys = Object.keys(SCENE_IMAGE_MAP);
 console.log(`Total mapped scene keys: ${sceneKeys.length}`);
+console.log(`Total defined biome themes: ${Object.keys(SCENE_THEMES).length}`);
 
 let missingCount = 0;
 const checkedPaths = new Set();

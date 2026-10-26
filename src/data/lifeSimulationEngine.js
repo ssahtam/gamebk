@@ -1,12 +1,13 @@
 // เครื่องยนต์จำลองไทม์ไลน์ชีวิตสไตล์ 1 in 8 Billion (1in8b.life) ดาร์กแฟนตาซี
 // บันทึกชีวิตปีต่อปีอัตโนมัติตามสายพันธุ์ (Species-Aware Logs) และการตัดสินใจครั้งสำคัญ (Major Decisions)
 
-import { getTaxonomyCategory } from './lifeCrisesEngine';
-import { getRandomMemeYearEvent } from './memeLifeEvents';
-import { MAJOR_DECISIONS as HUMANOID_MAJOR_DECISIONS } from './lifeSimulationEngineBackbone';
-import { BEAST_MAJOR_DECISIONS } from './beastMajorDecisions';
-import { UNDEAD_MAJOR_DECISIONS } from './undeadMajorDecisions';
-import { MONSTER_MAJOR_DECISIONS } from './monsterMajorDecisions';
+import { getTaxonomyCategory } from './lifeCrisesEngine.js';
+import { getRandomMemeYearEvent } from './memeLifeEvents.js';
+import { MAJOR_DECISIONS as HUMANOID_MAJOR_DECISIONS } from './lifeSimulationEngineBackbone.js';
+import { BEAST_MAJOR_DECISIONS } from './beastMajorDecisions.js';
+import { UNDEAD_MAJOR_DECISIONS } from './undeadMajorDecisions.js';
+import { MONSTER_MAJOR_DECISIONS } from './monsterMajorDecisions.js';
+import { getRandomEventForAge, checkChoiceAvailability } from './lifeStoryEngine.js';
 export { 
   HUMANOID_MAJOR_DECISIONS, 
   HUMANOID_MAJOR_DECISIONS as MAJOR_DECISIONS,
@@ -567,5 +568,35 @@ export function generateAnnualLog(age, character, demographics, currentVitals, s
     text: `ชีวิตดำเนินไปอย่างราบรื่นท่ามกลางสายลมแห่งแคว้น`,
     sceneId: 'alley',
     statDelta: {}
+  };
+}
+
+
+// ==========================================
+// 6. ดึงเหตุการณ์มหากาพย์เนื้อเรื่องข้ามวัย (จาก lifeStoryEngine.js)
+// ==========================================
+export const LORE_MILESTONE_AGES = [1, 4, 7, 11, 15, 21, 28, 38, 46, 58];
+
+export function getLoreChapterForAge(age, character, seenLoreIds = new Set()) {
+  if (!LORE_MILESTONE_AGES.includes(age)) return null;
+  const ev = getRandomEventForAge(age, seenLoreIds, character);
+  if (!ev) return null;
+
+  // กรองเฉพาะตัวเลือกที่สรีระของสายพันธุ์นี้ทำได้
+  const validChoices = (ev.choices || []).filter(ch => {
+    const check = checkChoiceAvailability(ch, character);
+    return !check.locked;
+  });
+
+  if (validChoices.length === 0) return null;
+  if (ev.id && seenLoreIds) {
+    seenLoreIds.add(ev.id);
+  }
+
+  return {
+    ...ev,
+    age,
+    isLoreChapter: true,
+    choices: validChoices
   };
 }

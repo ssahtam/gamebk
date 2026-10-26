@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import PixelCharacterAvatar from './PixelCharacterAvatar';
-import { getAssetUrl } from '../utils/assets';
+import PixelCharacterAvatar from './PixelCharacterAvatar.jsx';
+import { getAssetUrl } from '../utils/assets.js';
 
 // แมปปิ้งรูปภาพพอร์ตเทรตตัวละคร (Character Portrait Art)
 export const PORTRAIT_IMAGE_MAP = {

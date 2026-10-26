@@ -6,9 +6,10 @@ export function getTaxonomyCategory(race) {
   const id = (race.id || '').toLowerCase();
   const bt = (race.bodyType || '').toLowerCase();
 
-  if (id === 'skeleton' || bt === 'skeleton' || bt === 'undead') return 'undead';
-  if (id === 'slime' || bt === 'slime') return 'slime';
-  if (id === 'capybara' || bt === 'beast') return 'beast';
+  if (id === 'skeleton' || bt === 'skeleton' || bt === 'undead' || bt === 'ghost') return 'undead';
+  if (id === 'slime' || bt === 'slime' || bt === 'monster' || bt === 'goblin' || bt === 'spider' || bt === 'mushroom') return 'monster';
+  if (id === 'capybara' || id === 'spy_pigeon' || bt === 'beast' || bt === 'bird' || bt === 'dragon' || bt === 'lobster') return 'beast';
+  if (id === 'vending_machine' || id === 'sentient_sword' || id === 'mimic_chest' || id === 'truck_calamity' || bt === 'object' || bt === 'sword' || bt === 'mimic' || bt === 'truck') return 'object';
   return 'humanoid';
 }
 
@@ -18,7 +19,7 @@ export function getLineageOrigin(character, realm, socialClass) {
 
   if (raceId === 'slime') {
     return {
-      type: 'slime',
+      type: 'monster',
       title: 'ข้อมูลต้นกำเนิดเจลลี่',
       primaryLabel: 'แหล่งกำเนิด:',
       primaryValue: 'แอ่งน้ำมานาเรืองแสงใต้ถ้ำลึก',
@@ -52,6 +53,71 @@ export function getLineageOrigin(character, realm, socialClass) {
       secondaryValue: 'ตัวตึงประจำบ่อ ส้มยูสุเกาะหัวไม่เคยหล่น',
       detailLabel: 'ระดับความชิล:',
       detailValue: 'จิตสงบนิ่งระดับนิพพาน 100%'
+    };
+  }
+
+  if (raceId === 'spy_pigeon') {
+    return {
+      type: 'beast',
+      title: 'ข้อมูลรังหน่วยข่าวกรองเวหา',
+      primaryLabel: 'รังกำเนิด:',
+      primaryValue: 'ยอดหอระฆังหน่วยสืบราชการลับเมืองหลวง',
+      secondaryLabel: 'ภารกิจแรกเกิด:',
+      secondaryValue: 'ผูกกระบอกรหัสลับที่ข้อเท้าพร้อมบินลาดตระเวน',
+      detailLabel: 'สภาพปีก:',
+      detailValue: 'ขนเทาเหลือบมรกต บินโฉบเงียบกริบไร้เสียง'
+    };
+  }
+
+  if (raceId === 'vending_machine') {
+    return {
+      type: 'object',
+      title: 'ข้อมูลหมายเลขเครื่องและจุดติดตั้ง',
+      primaryLabel: 'จุดติดตั้ง:',
+      primaryValue: 'ป้ายรถม้าหน้าทางเข้าดันเจี้ยนชั้น 1',
+      secondaryLabel: 'ระบบจ่ายไฟ:',
+      secondaryValue: 'แบตเตอรี่คอร์มานา 220V สังเคราะห์น้ำดื่มอัตโนมัติ',
+      detailLabel: 'สถานะตัวถัง:',
+      detailValue: 'สีแดงสด เคลือบกันสนิม ช่องรับเหรียญพร้อมทำงาน'
+    };
+  }
+
+  if (raceId === 'sentient_sword') {
+    return {
+      type: 'object',
+      title: 'ข้อมูลศาสตราวิญญาณโบราณ',
+      primaryLabel: 'แท่นสถิต:',
+      primaryValue: 'แท่นศิลาโบราณกลางป่าไผ่สายหมอก',
+      secondaryLabel: 'โลหะตีขึ้นรูป:',
+      secondaryValue: 'แร่มิธริลผสมเหล็กอุกกาบาตฝังรูนสีคราม',
+      detailLabel: 'ความคมใบมีด:',
+      detailValue: 'คมกริบระดับผ่ามิติ ลอยตัวพูดคุยผ่านกระแสจิตได้'
+    };
+  }
+
+  if (raceId === 'mimic_chest') {
+    return {
+      type: 'object',
+      title: 'ข้อมูลหีบสมบัติจำแลง',
+      primaryLabel: 'ห้องที่ซ่อนตัว:',
+      primaryValue: 'ห้องโถงสมบัติชั้นในสุดของเขาวงกตโบราณ',
+      secondaryLabel: 'เหยื่อล่อในปาก:',
+      secondaryValue: 'เหรียญทองคำแวววาวและม้วนคัมภีร์เวทลวงตา',
+      detailLabel: 'สุขภาพฟัน:',
+      detailValue: 'ฟันแหลมคม 42 ซี่ ลิ้นสีม่วงพร้อมงับ 100%'
+    };
+  }
+
+  if (raceId === 'truck_calamity') {
+    return {
+      type: 'object',
+      title: 'ข้อมูลทะเบียนยานยนต์ข้ามมิติ',
+      primaryLabel: 'จุดทะลุมิติ:',
+      primaryValue: 'ทางหลวงสายฟ้าผ่าเชื่อมสี่แยกโตเกียว-ต่างโลก',
+      secondaryLabel: 'ขุมพลังเครื่องยนต์:',
+      secondaryValue: 'ดีเซลเวทมนตร์ 6 สูบ เทอร์โบคอร์มังกร 300 แรงม้า',
+      detailLabel: 'อุปกรณ์เสริม:',
+      detailValue: 'กันชนเหล็กกล้าหนา 1 ฟุต พร้อมแตรลมสามช่า'
     };
   }
 
@@ -94,6 +160,19 @@ export function getLineageOrigin(character, realm, socialClass) {
     };
   }
 
+  if (raceId === 'branded_one') {
+    return {
+      type: 'humanoid',
+      title: 'ข้อมูลผู้ถูกตีตราแห่งกองทหารรับจ้าง',
+      primaryLabel: 'ครอบครัวบุญธรรม:',
+      primaryValue: 'เติบโตในค่ายกองทหารรับจ้างพเนจรกลางสมรภูมิ',
+      secondaryLabel: 'รอยตราประจำตัว:',
+      secondaryValue: 'ตราประทับสีเลือดที่ต้นคอที่จะหลั่งโลหิตเมื่ออสูรเข้าใกล้',
+      detailLabel: 'อาวุธคู่กาย:',
+      detailValue: 'ฝึกกวัดแกว่งดาบเหล็กขนาดใหญ่กว่าตัวตั้งแต่เด็ก'
+    };
+  }
+
   // Human / Standard
   const className = socialClass?.name || 'ชาวบ้าน';
   return {
@@ -102,10 +181,10 @@ export function getLineageOrigin(character, realm, socialClass) {
     primaryLabel: 'ครอบครัว:',
     primaryValue: className.includes('ขุนนาง') ? 'ตระกูลชนชั้นสูงประจำแคว้น' :
                   className.includes('พาณิชย์') ? 'ครอบครัวพ่อค้าเจ้าของแผงตลาด' :
-                  className.includes('ยากจน') || className.includes('สลัม') ? 'สลัมตรอกมืด อาหารมื้อละก้อน' : 'ชาวบ้านทำมาหากินสุจริต',
+                  className.includes('ยากจน') || className.includes('สลัม') || className.includes('ยาจก') ? 'สลัมตรอกมืด อาหารมื้อละก้อน' : 'ชาวบ้านทำมาหากินสุจริต',
     secondaryLabel: 'บ้านพักอาศัย:',
     secondaryValue: className.includes('ขุนนาง') ? 'คฤหาสน์หินติดสวนดอกไม้' :
-                    className.includes('ยากจน') ? 'เพิงไม้เก่าลมพัดผ่านหลังคารั่ว' : 'บ้านไม้สองชั้นริมถนน',
+                    className.includes('ยากจน') || className.includes('ยาจก') ? 'เพิงไม้เก่าลมพัดผ่านหลังคารั่ว' : 'บ้านไม้สองชั้นริมถนน',
     detailLabel: 'สถานะตัวเรา:',
     detailValue: 'เด็กคนแรกของบ้าน พกความทรงจำจากชาติก่อนมาเต็มหัว'
   };
@@ -449,9 +528,9 @@ export const RANDOM_LIFE_CRISES = [
 ];
 
 // ตรวจสอบและสุ่มวิกฤตการณ์ประจำปี (ไม่ซ้ำ ID ที่เคยเกิดแล้วในชีวิตนี้!)
-export function checkAnnualCrisis(age, character, currentVitals, seenDecisions = new Set()) {
-  // สุ่มโอกาสเกิดวิกฤตราว 20%
-  if (Math.random() > 0.20) return null;
+export function checkAnnualCrisis(age, character, currentVitals, seenDecisions = new Set(), extraChance = 0) {
+  // สุ่มโอกาสเกิดวิกฤตราว 20% (+ โบนัสจากคำสาปหรือพร)
+  if (Math.random() > (0.20 + extraChance)) return null;
 
   const validCrises = RANDOM_LIFE_CRISES.filter(c => {
     // ห้ามซ้ำกับที่เคยเจอแล้วเด็ดขาด!

@@ -724,7 +724,7 @@ export const MAJOR_DECISIONS = [
 ];
 
 // Helper Function: ดึงการตัดสินใจตามช่วงอายุ โดยห้ามซ้ำกับ ID ที่เคยเจอแล้วในชีวิตนี้
-export function getMajorDecisionForAge(age, seenDecisions = new Set()) {
+export function getBackboneDecisionForAge(age, seenDecisions = new Set()) {
   const candidates = MAJOR_DECISIONS.filter(d => d.age === age && !seenDecisions.has(d.id));
   if (candidates.length === 0) {
     // ถ้าเคยเจอหมดแล้ว (กรณีเกิดซ้ำในวัยเดิม) ให้สุ่มจากอันที่มีแต่ไม่ crash

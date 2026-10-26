@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import PixelMemeAvatar from './PixelMemeAvatar';
+import PixelMemeAvatar from './PixelMemeAvatar.jsx';
 
 // ข้อมูลการเสียชีวิตตลกร้ายในแดนมรณะ (Recent Nether Deaths)
 const RECENT_FALLEN_SOULS = [
@@ -147,7 +147,7 @@ export default function TitleScreenView({ onRollBirth, soundEnabled, onToggleSou
   }, []);
 
   return (
-    <div style={containerStyle}>
+    <div style={titleContainerStyle}>
       {/* 1. Header Toolbar: Sound & CRT Settings */}
       <div style={toolbarStyle}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -349,7 +349,7 @@ export default function TitleScreenView({ onRollBirth, soundEnabled, onToggleSou
 // ==========================================
 // 32-Bit Retro & Dark Fantasy UI Styles
 // ==========================================
-const containerStyle = {
+const titleContainerStyle = {
   width: '100%',
   maxWidth: '780px',
   margin: '0 auto',

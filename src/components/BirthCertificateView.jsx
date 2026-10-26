@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import PixelCharacterAvatar from './PixelCharacterAvatar';
-import { PORTRAIT_IMAGE_MAP } from './CharacterVisualCard';
+import PixelCharacterAvatar from './PixelCharacterAvatar.jsx';
+import { PORTRAIT_IMAGE_MAP } from './CharacterVisualCard.jsx';
 
 export default function BirthCertificateView({
   character,
@@ -12,8 +12,12 @@ export default function BirthCertificateView({
   familyFund,
   gold,
   debt,
+  boon,
+  innateCurse,
+  weapon,
+  armor,
+  generation = 1,
   onStartLife,
-  onReroll,
   onNameChange,
   onRerollName
 }) {
@@ -21,7 +25,7 @@ export default function BirthCertificateView({
 
   const race = character.race;
   const familyWealthDots = socialClass.name.includes('ขุนนาง') || socialClass.name.includes('เศรษฐี') ? 5
-    : socialClass.name.includes('พาณิชย์') || socialClass.name.includes('อัศวิน') ? 4
+    : socialClass.name.includes('พาณิชย์') || socialClass.name.includes('อัศวิน') || socialClass.name.includes('ช่างฝีมือ') ? 4
     : socialClass.name.includes('ชาวบ้าน') || socialClass.name.includes('เสรี') ? 3
     : socialClass.name.includes('ยากจน') || socialClass.name.includes('สลัม') ? 2 : 1;
 
@@ -31,7 +35,7 @@ export default function BirthCertificateView({
   return (
     <div style={{
       width: '100%',
-      maxWidth: '680px',
+      maxWidth: '720px',
       margin: '0 auto',
       backgroundColor: '#0c1017',
       borderRadius: '14px',
@@ -50,12 +54,14 @@ export default function BirthCertificateView({
         justifyContent: 'space-between',
         alignItems: 'center',
         color: '#ffffff',
-        borderBottom: '2px solid #f59e0b'
+        borderBottom: '2px solid #f59e0b',
+        flexWrap: 'wrap',
+        gap: '8px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ fontSize: '20px' }}>📜</span>
           <h2 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold', color: '#ffd166', letterSpacing: '0.5px' }}>
-            ทะเบียนเกิดใหม่ต่างโลก (Isekai Rebirth Pass)
+            ทะเบียนเกิดใหม่ต่างโลก (รุ่นที่ {generation})
           </h2>
         </div>
         <span style={{
@@ -81,7 +87,8 @@ export default function BirthCertificateView({
           border: '1px solid #1e293b',
           borderRadius: '12px',
           padding: '16px',
-          marginBottom: '20px'
+          marginBottom: '18px',
+          flexWrap: 'wrap'
         }}>
           <div style={{
             width: '84px',
@@ -108,9 +115,12 @@ export default function BirthCertificateView({
             )}
           </div>
 
-          <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ flex: 1, minWidth: '220px' }}>
+            <div style={{ fontSize: '11px', color: '#94a3b8', marginBottom: '4px', fontStyle: 'italic' }}>
+              "{bestowedGiver || race.namingGiver || 'ชะตากรรมขนานนามให้เจ้าว่า'}..."
+            </div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-              <div style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 'bold' }}>
+              <div style={{ fontSize: '11px', color: '#cbd5e1', fontWeight: 'bold' }}>
                 ✏️ ชื่อนามในชาตินี้ (พิมพ์แก้ได้เอง):
               </div>
               {onRerollName && (
@@ -132,12 +142,11 @@ export default function BirthCertificateView({
                   }}
                   title="สุ่มชื่อใหม่"
                 >
-                  🎲 สุ่มชื่อ
+                  🎲 สุ่มชื่อใหม่
                 </button>
               )}
             </div>
 
-            {/* Editable Name Input Box */}
             <input
               type="text"
               value={characterName}
@@ -151,7 +160,7 @@ export default function BirthCertificateView({
                 border: '1.5px solid #f59e0b',
                 borderRadius: '6px',
                 padding: '6px 12px',
-                fontSize: '18px',
+                fontSize: '17px',
                 fontWeight: 'bold',
                 color: '#f8fafc',
                 outline: 'none',
@@ -160,7 +169,7 @@ export default function BirthCertificateView({
             />
 
             <div style={{ fontSize: '12px', color: race.badgeColor || '#38bdf8', fontWeight: 'bold', marginTop: '6px' }}>
-              ✦ {race.name} • {gender}
+              ✦ {race.name} • เพศ: {gender} • งบครอบครัว: {familyFund}G
             </div>
           </div>
         </div>
@@ -168,25 +177,22 @@ export default function BirthCertificateView({
         {/* 4 Clean RPG Cards Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
           gap: '12px',
-          marginBottom: '20px'
+          marginBottom: '16px'
         }}>
-          {/* Card 1: เผ่าพันธุ์ */}
           <div style={statCardStyle}>
-            <div style={cardLabelStyle}>🏷️ เผ่าพันธุ์</div>
+            <div style={cardLabelStyle}>🏷️ เผ่าพันธุ์ & จุดเด่น</div>
             <div style={cardValueStyle}>{race.name.split(' (')[0]}</div>
-            <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '2px' }}>{race.badge}</div>
+            <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '2px' }}>{race.strengths || race.badge}</div>
           </div>
 
-          {/* Card 2: ดินแดนเกิด */}
           <div style={statCardStyle}>
             <div style={cardLabelStyle}>🏰 ดินแดนเกิด</div>
             <div style={cardValueStyle}>{realm.name}</div>
-            <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '2px' }}>{realm.desc ? realm.desc.slice(0, 24) + '...' : 'ดินแดนแห่งโชคชะตา'}</div>
+            <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '2px' }}>{realm.desc || 'ดินแดนแห่งโชคชะตา'}</div>
           </div>
 
-          {/* Card 3: ฐานะครอบครัว */}
           <div style={statCardStyle}>
             <div style={cardLabelStyle}>👑 ฐานะครอบครัว</div>
             <div style={{ ...cardValueStyle, color: '#ffd166' }}>
@@ -195,29 +201,70 @@ export default function BirthCertificateView({
             <div style={{ fontSize: '11px', color: '#cbd5e1', marginTop: '2px' }}>{socialClass.name}</div>
           </div>
 
-          {/* Card 4: ทรัพย์สินเริ่มต้น */}
           <div style={statCardStyle}>
-            <div style={cardLabelStyle}>🪙 เงินก้นถุงเริ่มต้น</div>
-            <div style={{ ...cardValueStyle, color: '#4ade80' }}>{gold} Gold</div>
-            <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '2px' }}>อายุขัยเฉลี่ย: {race.maxAge} ปี</div>
+            <div style={cardLabelStyle}>🪙 ทรัพย์สิน & อายุขัยเฉลี่ย</div>
+            <div style={{ ...cardValueStyle, color: '#4ade80' }}>
+              {gold} Gold {debt > 0 && <span style={{ color: '#f87171', fontSize: '12px' }}>(หนี้ {debt}G)</span>}
+            </div>
+            <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '2px' }}>
+              อายุขัยสายพันธุ์: ~{race.maxAge} ปี • อาวุธ: {weapon?.name || 'มือเปล่า'}
+            </div>
           </div>
+        </div>
+
+        {/* Boon & Innate Curse Row (เชื่อมระบบกาชาพรและคำสาปให้ผู้เล่นเห็นชัด!) */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+          gap: '12px',
+          marginBottom: '18px'
+        }}>
+          {boon && (
+            <div style={{
+              backgroundColor: 'rgba(234, 179, 8, 0.08)',
+              border: `1px solid ${boon.badgeColor || '#f59e0b'}`,
+              borderRadius: '8px',
+              padding: '10px 14px'
+            }}>
+              <div style={{ fontSize: '11px', color: '#fbbf24', fontWeight: 'bold', marginBottom: '2px' }}>
+                {boon.icon || '🌟'} พรต่างโลกที่สุ่มได้ ({boon.rarity}):
+              </div>
+              <div style={{ fontSize: '13.5px', color: '#f8fafc', fontWeight: 'bold' }}>{boon.name}</div>
+              <div style={{ fontSize: '11px', color: '#cbd5e1', marginTop: '2px' }}>{boon.desc}</div>
+            </div>
+          )}
+
+          {innateCurse && (
+            <div style={{
+              backgroundColor: 'rgba(239, 68, 68, 0.08)',
+              border: '1px solid rgba(239, 68, 68, 0.35)',
+              borderRadius: '8px',
+              padding: '10px 14px'
+            }}>
+              <div style={{ fontSize: '11px', color: '#fca5a5', fontWeight: 'bold', marginBottom: '2px' }}>
+                {innateCurse.icon || '💀'} คำสาปติดตัวแต่กำเนิด:
+              </div>
+              <div style={{ fontSize: '13.5px', color: '#fecaca', fontWeight: 'bold' }}>{innateCurse.name}</div>
+              <div style={{ fontSize: '11px', color: '#cbd5e1', marginTop: '2px' }}>{innateCurse.desc}</div>
+            </div>
+          )}
         </div>
 
         {/* Short Fun Meme Backstory */}
         <div style={{
-          backgroundColor: 'rgba(245, 158, 11, 0.08)',
-          border: '1px solid rgba(245, 158, 11, 0.25)',
+          backgroundColor: 'rgba(56, 189, 248, 0.08)',
+          border: '1px solid rgba(56, 189, 248, 0.25)',
           borderRadius: '8px',
           padding: '12px 16px',
-          marginBottom: '24px',
-          fontSize: '13px',
+          marginBottom: '20px',
+          fontSize: '12.5px',
           lineHeight: '1.6',
-          color: '#fef3c7'
+          color: '#e0f2fe'
         }}>
-          💡 <strong>เรื่องย่อก่อนเริ่ม:</strong> คุณตื่นขึ้นมาในร่างนี้พร้อมความทรงจำชาติก่อนที่ยังหลงเหลือ โลกดาร์กแฟนตาซีแห่งนี้เต็มไปด้วยมอนสเตอร์ โรคภัย และความเลื่อมล้ำ แต่ก็มีโอกาสรวยและกลายเป็นตำนานได้เหมือนกัน!
+          💡 <strong>บันทึกแรกเกิด:</strong> {race.familyStatus || race.desc} (อุปกรณ์ติดตัว: {weapon?.name || 'ไม่มี'} / {armor?.name || 'ชุดผ้าป่าน'})
         </div>
 
-        {/* Bottom Actions: No Manual Reroll Allowed */}
+        {/* Bottom Actions */}
         <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', paddingTop: '12px', borderTop: '1px solid #1f293d' }}>
           <button
             onClick={onStartLife}
@@ -235,14 +282,6 @@ export default function BirthCertificateView({
               display: 'flex',
               alignItems: 'center',
               gap: '8px'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#f43f5e';
-              e.currentTarget.style.transform = 'scale(1.02)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#e11d48';
-              e.currentTarget.style.transform = 'scale(1)';
             }}
           >
             <span>⚔️ เริ่มต้นชะตากรรมชีวิตนี้เลย!</span>

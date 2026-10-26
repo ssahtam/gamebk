@@ -1,4 +1,4 @@
-// ระบบสุ่มชื่อและสมญานามตามเผ่าพันธุ์หลักในโลกดาร์กแฟนตาซี
+// ระบบสุ่มชื่อและสมญานามตามเผ่าพันธุ์หลักและเผ่าลับในโลกดาร์กแฟนตาซี
 export const HUMAN_MALE_NAMES = [
   'กัตซ์', 'โซแลร์', 'ทาร์นิช', 'กริฟฟิธ', 'คาซึมะ', 'ซูบารุ',
   'ไอนซ์', 'ซิด', 'คิริโตะ', 'อาร์เทอริอัส', 'มาลิเคธ', 'ก็อดฟรีย์',
@@ -44,10 +44,21 @@ export const CAPYBARA_NAMES = [
   'เจ้าก้อนขน', 'มงคล', 'กะปิ', 'บาร่าคุง'
 ];
 
+export const PIGEON_NAMES = [
+  'กุ๊กกู๋', 'สายลับ 007', 'พิราบขาว', 'เหยี่ยวข่าว', 'จอมจิก', 'วิหคสายลม', 'นกน้อยรู้ทัน'
+];
+
+export const OBJECT_NAMES = [
+  'ฮัคคุง', 'เวนดี้-9000', 'ดูราเอล', 'เอ็กซ์คาลิเบอร์', 'มิมิกกี้', 'กล่องเขมือบ', 'ฮีโน่-300', 'สิบล้อซิ่ง'
+];
+
 export const TITLES_BY_RACE = {
   human: [
     'ผู้ถูกรถบรรทุกส่งมา', 'ผู้กล้าถังแตก', 'สายดวงดีเกินคาด', 'นักสู้กองเถ้า',
     'มนุษย์เงินเดือนเก่า', 'ผู้รอดตายจากสลัม', 'ยอดนักผจญภัย', 'ดวงตาสีมุ่งมั่น'
+  ],
+  branded_one: [
+    'นักรบเกราะคลั่ง', 'ผู้แบกดาบเหล็กยักษ์', 'ผู้ท้าทายสุริยุปราคา', 'หมาป่าทมิฬตาเดียว'
   ],
   elf: [
     'ผู้สดับลมพฤกษา', 'หูแหลมผู้หยิ่งผยอง', 'จอมเวทสามร้อยปี', 'แห่งป่าต้องห้าม',
@@ -72,36 +83,47 @@ export const TITLES_BY_RACE = {
   capybara: [
     'ผู้ชิลเหนือกาลเวลา', 'ส้มยูสุบนกระหม่อม', 'มิตรแท้แห่งมัลติเวิร์ส',
     'ผู้นิ่งสงบสยบมาร', 'ราชาบ่อออนเซ็น', 'ผู้เป็นมิตรกับจอมมาร', 'ก้อนกลมสุขใจ'
+  ],
+  spy_pigeon: [
+    'สายข่าวกรองหลวง', 'ปีกไร้เงา', 'ผู้คาบความลับจักรวรรดิ', 'จอมโฉบขนมปัง'
+  ],
+  vending_machine: [
+    'ตู้เสบียงหน้าดันเจี้ยน', 'ผู้เสิร์ฟซุปข้าวโพดอุ่น', 'ไฟนีออนแห่งความหวัง'
+  ],
+  sentient_sword: [
+    'คมดาบตัดจันทรา', 'ผู้ปักบนแท่นศิลา', 'ศาสตราปราชญ์โบราณ'
+  ],
+  mimic_chest: [
+    'กล่องสมบัติยิ้มสยอง', 'ผู้ดักงับจอมเวท', 'ลิ้นม่วงแห่งเขาวงกต'
+  ],
+  truck_calamity: [
+    'ราชันย์แห่งทางหลวงข้ามมิติ', 'ผู้ส่งวิญญาณผู้กล้า', 'แตรสามช่าสะท้านภพ'
   ]
 };
 
 export function generateBestowedName(race, gender = 'ชาย') {
   const raceId = (race?.id || '').toLowerCase();
   let namePool = HUMAN_MALE_NAMES;
-  let titlePool = TITLES_BY_RACE.human;
+  let titlePool = TITLES_BY_RACE[raceId] || TITLES_BY_RACE.human;
 
   if (raceId === 'elf') {
     namePool = ELF_NAMES;
-    titlePool = TITLES_BY_RACE.elf;
   } else if (raceId === 'orc') {
     namePool = ORC_NAMES;
-    titlePool = TITLES_BY_RACE.orc;
   } else if (raceId === 'demon') {
     namePool = DEMON_NAMES;
-    titlePool = TITLES_BY_RACE.demon;
   } else if (raceId === 'slime') {
     namePool = SLIME_NAMES;
-    titlePool = TITLES_BY_RACE.slime;
   } else if (raceId === 'skeleton') {
     namePool = SKELETON_NAMES;
-    titlePool = TITLES_BY_RACE.skeleton;
   } else if (raceId === 'capybara') {
     namePool = CAPYBARA_NAMES;
-    titlePool = TITLES_BY_RACE.capybara;
+  } else if (raceId === 'spy_pigeon') {
+    namePool = PIGEON_NAMES;
+  } else if (['vending_machine', 'sentient_sword', 'mimic_chest', 'truck_calamity'].includes(raceId)) {
+    namePool = OBJECT_NAMES;
   } else {
-    // Default human
     namePool = gender === 'หญิง' ? HUMAN_FEMALE_NAMES : HUMAN_MALE_NAMES;
-    titlePool = TITLES_BY_RACE.human;
   }
 
   const baseName = namePool[Math.floor(Math.random() * namePool.length)];

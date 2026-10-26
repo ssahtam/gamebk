@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import PixelMemeAvatar from './PixelMemeAvatar';
+import PixelMemeAvatar from './PixelMemeAvatar.jsx';
 
 export default function MemePixelBackground({ gameState = 'TITLE', age = 0 }) {
   const canvasRef = useRef(null);

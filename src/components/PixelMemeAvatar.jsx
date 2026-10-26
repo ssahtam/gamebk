@@ -1,7 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { getAssetUrl } from '../utils/assets';
+import React, { useRef, useEffect } from 'react';
+import { getAssetUrl } from '../utils/assets.js';
 
-// แมปปิ้งรูปภาพมีมในตำนาน
 export const MEME_IMAGES = {
   horse: getAssetUrl('memes/meme_berserk_horse.jpg'),
   portrait: getAssetUrl('memes/meme_berserk_portrait.jpg'),
@@ -9,81 +8,84 @@ export const MEME_IMAGES = {
   chill: getAssetUrl('memes/meme_face_chill.jpg')
 };
 
-// 4x4 Bayer Dithering Matrix สำหรับสไตล์ Aseprite 16-Bit แท้
-const BAYER_4X4 = [
-  [0, 8, 2, 10],
-  [12, 4, 14, 6],
-  [3, 11, 1, 9],
-  [15, 7, 13, 5]
-];
-
 export default function PixelMemeAvatar({
   memeKey = 'horse',
-  size = 64,
+  size = 48,
   className = '',
   style = {}
 }) {
   const canvasRef = useRef(null);
-  const [rendered, setRendered] = useState(false);
-  const src = MEME_IMAGES[memeKey] || MEME_IMAGES.horse;
 
   useEffect(() => {
-    let isMounted = true;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    let frameId;
+    let tick = 0;
 
-    const img = new Image();
-    img.src = src;
+    const render = () => {
+      tick++;
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
 
-    img.onload = () => {
-      if (!isMounted) return;
-      try {
-        const lowRes = 48;
-        const offCanvas = document.createElement('canvas');
-        offCanvas.width = lowRes;
-        offCanvas.height = lowRes;
-        const offCtx = offCanvas.getContext('2d', { willReadFrequently: true });
+      // Background
+      const bg = ctx.createLinearGradient(0, 0, 0, h);
+      bg.addColorStop(0, '#0f172a');
+      bg.addColorStop(1, '#1e1b4b');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, w, h);
 
-        offCtx.imageSmoothingEnabled = false;
-        offCtx.drawImage(img, 0, 0, lowRes, lowRes);
+      const bob = Math.floor(Math.sin(tick * 0.1) * 1.5);
+      const cx = Math.floor(w / 2);
+      const cy = Math.floor(h / 2);
 
-        const imgData = offCtx.getImageData(0, 0, lowRes, lowRes);
-        const data = imgData.data;
-        const levels = 24;
-        const step = 255 / (levels - 1);
-
-        for (let y = 0; y < lowRes; y++) {
-          for (let x = 0; x < lowRes; x++) {
-            const idx = (y * lowRes + x) * 4;
-            const dither = (BAYER_4X4[y % 4][x % 4] / 16 - 0.5) * (step * 0.7);
-            data[idx] = Math.min(255, Math.max(0, Math.round((data[idx] + dither) / step) * step));
-            data[idx + 1] = Math.min(255, Math.max(0, Math.round((data[idx + 1] + dither) / step) * step));
-            data[idx + 2] = Math.min(255, Math.max(0, Math.round((data[idx + 2] + dither) / step) * step));
-          }
-        }
-        offCtx.putImageData(imgData, 0, 0);
-
-        ctx.imageSmoothingEnabled = false;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(offCanvas, 0, 0, canvas.width, canvas.height);
-        setRendered(true);
-      } catch (e) {
-        // Fallback to direct draw
-        ctx.imageSmoothingEnabled = false;
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        setRendered(true);
+      if (memeKey === 'horse') {
+        // อัศวินควบม้าหน้าคนยิ้มหลับตาพริ้ม
+        ctx.fillStyle = '#78350f';
+        ctx.fillRect(cx - 12, cy + 2 + bob, 20, 10);
+        ctx.fillStyle = '#fed7aa';
+        ctx.fillRect(cx + 2, cy - 8 + bob, 11, 11);
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(cx + 5, cy - 4 + bob, 3, 1.5);
+        ctx.fillRect(cx + 9, cy - 4 + bob, 3, 1.5);
+        ctx.fillStyle = '#f43f5e';
+        ctx.fillRect(cx + 6, cy - 1 + bob, 5, 2);
+      } else if (memeKey === 'portrait') {
+        // จอมทัพเกราะทมิฬอมยิ้ม
+        ctx.fillStyle = '#1e293b';
+        ctx.fillRect(cx - 10, cy - 12 + bob, 20, 24);
+        ctx.fillStyle = '#fed7aa';
+        ctx.fillRect(cx - 6, cy - 4 + bob, 12, 10);
+        ctx.fillStyle = '#ef4444';
+        ctx.fillRect(cx - 4, cy - 2 + bob, 3, 2);
+        ctx.fillRect(cx + 2, cy - 2 + bob, 3, 2);
+      } else if (memeKey === 'full') {
+        // จอมดาบยักษ์ผ่ามิติ
+        ctx.fillStyle = '#94a3b8';
+        ctx.fillRect(cx + 5, cy - 16 + bob, 5, 30);
+        ctx.fillStyle = '#334155';
+        ctx.fillRect(cx - 9, cy - 6 + bob, 12, 18);
+        ctx.fillStyle = '#fed7aa';
+        ctx.fillRect(cx - 7, cy - 13 + bob, 8, 7);
+      } else {
+        // ผู้รู้แจ้งหน้าชิล (Chill Guy)
+        ctx.fillStyle = '#d97706';
+        ctx.fillRect(cx - 8, cy - 10 + bob, 16, 14);
+        ctx.fillStyle = '#3b82f6';
+        ctx.fillRect(cx - 9, cy + 4 + bob, 18, 10);
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(cx - 4, cy - 5 + bob, 3, 1.5);
+        ctx.fillRect(cx + 2, cy - 5 + bob, 3, 1.5);
+        ctx.fillRect(cx - 2, cy - 1 + bob, 6, 1.5);
       }
+
+      frameId = requestAnimationFrame(render);
     };
 
-    img.onerror = () => {
-      if (isMounted) setRendered(false);
-    };
-
-    return () => {
-      isMounted = false;
-    };
-  }, [src, size]);
+    render();
+    return () => cancelAnimationFrame(frameId);
+  }, [memeKey, size]);
 
   return (
     <div
@@ -102,33 +104,17 @@ export default function PixelMemeAvatar({
         ...style
       }}
     >
-      {/* 16-Bit Pixel Dither Canvas */}
       <canvas
         ref={canvasRef}
-        width={size}
-        height={size}
+        width={48}
+        height={48}
         style={{
           width: '100%',
           height: '100%',
           imageRendering: 'pixelated',
-          display: rendered ? 'block' : 'none'
+          display: 'block'
         }}
       />
-
-      {/* Guaranteed Native <img> Fallback (never blank) */}
-      {!rendered && (
-        <img
-          src={src}
-          alt={memeKey}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            imageRendering: 'pixelated',
-            display: 'block'
-          }}
-        />
-      )}
     </div>
   );
 }
